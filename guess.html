@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guess the Number</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  width: 340px;
+  box-shadow:
+    0 0 15px rgba(0, 255, 255, 0.2),
+    0 0 30px rgba(255, 0, 255, 0.2),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -40%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 180deg, #ff00ff, #00ffff, #ff00ff);
+  animation: spin 8s linear infinite;
+  filter: blur(50px);
+  opacity: 0.25;
+  z-index: -1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #ff00c8, #00eaff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+input {
+  width: 80%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+input::placeholder {
+  color: #ddd;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff00ff, #00ffff);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00ffff88, 0 0 25px #ff00ff55;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #00ffffaa, 0 0 40px #ff00ffaa;
+}
+
+p {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 16px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+#result {
+  font-size: 22px;
+  color: #ffea00;
+  text-shadow: 0 0 8px #ffea0088;
+}
+
+#score {
+  font-size: 18px;
+  color: #ffffffcc;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Guess the Number</h1>
+    <input id="guessnumber" type="number" placeholder="Enter a number (1–10)">
+    <br />
+    <button onclick="check()">Click</button>
+    <p id="result">you are right/wrong</p>
+    <p id="score">score: 10</p>
+  </div>
+
+  <script>
+    var guessnumber = document.getElementById("guessnumber");
+    var result = document.getElementById("result");
+    var score = document.getElementById("score");
+    var randomnumber = Math.floor(Math.random() * 10) + 1;
+    var totalscore = 10;
+
+    function check() {
+      var enterednumber = guessnumber.value;
+      if (randomnumber == enterednumber) {
+        console.log("Right");
+        result.textContent = "Right";
+        alert("YOU WON...");
+      } else {
+        totalscore = totalscore - 1;
+        score.textContent = "score: " + totalscore;
+        result.textContent = "wrong";
+      }
+
+      if (totalscore === 0) {
+        alert("Game Over! The correct number was " + randomnumber);
+      }
+    }
+  </script>
+</body>
+</html>
